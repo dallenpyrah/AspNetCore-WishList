@@ -13,6 +13,5 @@ namespace WishList.Models
         [MaxLength(50)]
         public string Description { get; set; }
 
-
     }
 }
