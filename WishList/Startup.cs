@@ -17,14 +17,26 @@ namespace WishList
         // For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940
         public void ConfigureServices(IServiceCollection services)
         {
+            // This is for telling our application we want to add MVC services to our application. 
+            services.AddMvc();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
-            app.Run(async (context) =>
+
+            // It will use the development error handling page if we are in dev but it will use an exception handler if in prod 
+            if (env.IsDevelopment())
             {
-                await context.Response.WriteAsync("Hello World!");
+                app.UseDeveloperExceptionPage();
+            } else
+            {
+                app.UseExceptionHandler("/Home/Error");
+            }
+            // App.userouting marks the position in the middleware pipeline where a routing decision is made
+            app.UseRouting();
+            app.UseEndpoints(endpoints => {
+                endpoints.MapDefaultControllerRoute();
             });
         }
     }
