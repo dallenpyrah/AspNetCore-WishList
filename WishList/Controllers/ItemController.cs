@@ -34,7 +34,7 @@ namespace WishList.Controllers
         {
             _context.Items.Add(Item);
             _context.SaveChanges();
-            return View("Index");
+            return RedirectToAction("Index");
         }
 
         [HttpDelete]
@@ -44,7 +44,7 @@ namespace WishList.Controllers
             var item = _context.Items.FirstOrDefault(item => item.Id == Id);
             _context.Items.Remove(item);
             _context.SaveChanges();
-            return View("Index");
+            return RedirectToAction("Index");
         }
     }
 }
