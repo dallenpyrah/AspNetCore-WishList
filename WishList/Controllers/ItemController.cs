@@ -19,7 +19,8 @@ namespace WishList.Controllers
 
         public IActionResult Index()
         {
-            return View();
+            var model = _context.Items.ToList();
+            return View("Index", model);
         }
 
         [HttpGet]
@@ -32,6 +33,7 @@ namespace WishList.Controllers
         public IActionResult Create(Item Item)
         {
             _context.Items.Add(Item);
+            _context.SaveChanges();
             return View("Index");
         }
 
@@ -41,6 +43,7 @@ namespace WishList.Controllers
         {
             var item = _context.Items.FirstOrDefault(item => item.Id == Id);
             _context.Items.Remove(item);
+            _context.SaveChanges();
             return View("Index");
         }
     }
