@@ -32,6 +32,7 @@ namespace WishList.Controllers
         public IActionResult Create(Item Item)
         {
             _context.Items.Add(Item);
+            return View();
         }
 
         [HttpDelete]
@@ -39,11 +40,8 @@ namespace WishList.Controllers
         public IActionResult Delete(int Id)
         {
             var item = _context.Items.FirstOrDefault(item => item.Id == Id);
-            if (item != null)
-            {
-                _context.Items.Remove(item);
-                return View();
-            }
+            _context.Items.Remove(item);
+            return View();
         }
     }
 }
